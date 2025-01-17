@@ -5,8 +5,17 @@ const bcrypt = require("bcryptjs");
 const cors = require("cors");
 
 const app = express();
+
+// Middleware za parsiranje JSON tijela zahtjeva
 app.use(express.json());
-app.use(cors());
+
+
+app.use(cors({
+    origin: "http://localhost:3000", // URL frontenda
+    methods: ["GET", "POST", "PUT", "DELETE"], // Dozvoljene HTTP metode
+    credentials: true, // Omogućuje slanje kolačića ili zaglavlja za autentifikaciju
+}));
+
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST || "localhost",
@@ -14,6 +23,7 @@ const db = mysql.createConnection({
     password: process.env.DB_PASSWORD || "",
     database: process.env.DB_NAME || "aplikacija",
 });
+
 
 db.connect((err) => {
     if (err) {
@@ -23,14 +33,17 @@ db.connect((err) => {
     }
 });
 
+
 app.post("/register", async (req, res) => {
     const { ime, email, mobitel, lozinka } = req.body;
+
 
     if (!ime || !email || !lozinka) {
         return res.status(400).json({ message: "Sva polja su obavezna!" });
     }
 
     try {
+
         const [userExists] = await db.promise().query(
             "SELECT email FROM korisnici WHERE email = ?",
             [email]
@@ -39,6 +52,7 @@ app.post("/register", async (req, res) => {
         if (userExists.length > 0) {
             return res.status(400).json({ message: "Email već postoji!" });
         }
+
 
         const hashedPassword = await bcrypt.hash(lozinka, 10);
 
@@ -55,12 +69,7 @@ app.post("/register", async (req, res) => {
     }
 });
 
+
 app.listen(5000, () => {
     console.log("Server pokrenut na portu 5000");
 });
-
-app.post('/register', (req, res) => {
-    console.log(req.body);
-    res.send('Ruta /register je aktivna!');
-});
-
