@@ -3,7 +3,24 @@ import WelcomeScreen from "@/components/WelcomeScreen.vue";
 import DrugaStranica from "@/components/DrugaStranica.vue";
 import TrecaStranica from "@/components/TrecaStranica.vue";
 import Registracija from "@/components/Registracija.vue";
-import Login from "@/components/Login.vue";
+import Login from "@/components/Login.vue
+import { createRouter, createWebHistory } from 'vue-router';
+import Registracija from '../components/Registracija.vue'; //
+
+const routes = [
+    {
+        path: '/',
+        name: 'Registracija',
+        component: Registracija,
+    };
+];
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
+export default router;
 
 const routes = [
     {
