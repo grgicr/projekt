@@ -58,3 +58,9 @@ app.post("/register", async (req, res) => {
 app.listen(5000, () => {
     console.log("Server pokrenut na portu 5000");
 });
+
+app.post('/register', (req, res) => {
+    console.log(req.body);
+    res.send('Ruta /register je aktivna!');
+});
+
