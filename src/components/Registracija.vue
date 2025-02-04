@@ -19,9 +19,9 @@
       </div>
 
       <div class="form-group">
-        <label for="phone">Mobitel</label>
+        <label for="phone">Lozinka</label>
         <div class="input-with-icon">
-          <input type="tel" id="phone" v-model="formData.phone" placeholder="Unesite broj mobitela" required />
+          <input type="tel" id="phone" v-model="formData.password" placeholder="Unesite lozinku" required />
           <button type="button" class="icon-button">
             <img src="@/assets/eye-icon.png" alt="Show/Hide" />
           </button>
