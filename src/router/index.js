@@ -4,6 +4,7 @@ import DrugaStranica from "@/components/DrugaStranica.vue";
 import TrecaStranica from "@/components/TrecaStranica.vue";
 import Registracija from "@/components/Registracija.vue";
 import Login from "@/components/Login.vue";
+import OtpVerification  from "@/components/OtpVerification.vue";
 
 const routes = [
     {
@@ -31,6 +32,13 @@ const routes = [
         name: "LoginPage",
         component: Login,
     },
+
+    {
+        path: "/otp-verification",
+        name: "OtpVerification",
+        component: OtpVerification,
+    }
+
 ];
 
 const router = createRouter({

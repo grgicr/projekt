@@ -19,12 +19,9 @@
       </div>
 
       <div class="form-group">
-        <label for="phone">Lozinka</label>
+        <label for="phone">Mobitel</label>
         <div class="input-with-icon">
-          <input type="tel" id="phone" v-model="formData.password" placeholder="Unesite lozinku" required />
-          <button type="button" class="icon-button">
-            <img src="@/assets/eye-icon.png" alt="Show/Hide" />
-          </button>
+          <input type="tel" id="phone" v-model="formData.phone" placeholder="Unesite broj mobitela" required />
         </div>
       </div>
 
@@ -60,7 +57,10 @@ export default {
     },
     handleSubmit() {
       console.log("Podaci za registraciju:", this.formData);
-    },
+    setTimeout(() => {
+  this.$router.push("/otp-verification"); // Nakon registracije preusmjeri na OTP
+}, 1000);
+      }
   },
 };
 </script>
