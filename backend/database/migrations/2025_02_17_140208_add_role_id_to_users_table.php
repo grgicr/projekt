@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users', 'role_id')) { // Provjera da li kolona već postoji
-                $table->unsignedBigInteger('role_id')->default(2)->after('password'); // Dodajemo role_id nakon passworda
-
-                // Dodajemo foreign key na roles tabelu
-                $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            }
-        });
-    }
+            Schema::table('users', function (Blueprint $table) {
+                if (!Schema::hasColumn('users', 'role_id')) { // Provjera da li kolona već postoji
+                    $table->unsignedBigInteger('role_id')->default(2)->after('password'); // Dodajemo role_id nakon passworda
+                }
+            });
+        }
 
     /**
      * Reverse the migrations.

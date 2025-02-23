@@ -17,10 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone_number')->nullable(); // Dodano polje za broj telefona
+            $table->enum('status', ['active', 'inactive'])->default('active'); // Status korisnika
+            $table->foreignId('role_id')->default(2)->constrained('roles')->onDelete('cascade'); // Veza s roles tablicom
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('role_id')->default(2)->constrained('roles')->onDelete('cascade');
-
+            $table->softDeletes(); // Omogućeno "meko brisanje" korisnika
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
